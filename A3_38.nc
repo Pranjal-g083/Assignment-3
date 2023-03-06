@@ -16,10 +16,10 @@ void main{
 
     if(x<=10)
     x=11;
-    else x=10;
+    else x=+10;
 
     if(x==3)
-    x=5;        //inline comment
+    x=-5;        //inline comment
 
     if(x!=10)
     x=11;
