@@ -1,16 +1,16 @@
 /*C definitions and declarations    */
 %{
     #include<stdio.h>
-    #define KEYWORD                     257
-    #define IDENTIFIER                  258
-    #define INTEGER_CONSTANT            259
-    #define CHAR_CONSTANT               260
-    #define STRING_LITERAL              261
-    #define PUNCTUATOR                  262
-    #define SINGLE_LINE_COMMENT_START   263
-    #define SINGLE_LINE_COMMENT_END     264
-    #define MULTI_LINE_COMMENT_START    265
-    #define MULTI_LINE_COMMENT_END      266
+    #define KEYWORD                     260
+    #define IDENTIFIER                  261
+    #define INTEGER_CONSTANT            262
+    #define CHAR_CONSTANT               263
+    #define STRING_LITERAL              264
+    #define PUNCTUATOR                  265
+    #define SINGLE_LINE_COMMENT_START   266
+    #define SINGLE_LINE_COMMENT_END     267
+    #define MULTI_LINE_COMMENT_START    268
+    #define MULTI_LINE_COMMENT_END      269
 %}
 
 %x SINGLE_LINE_COMMENT
@@ -19,18 +19,19 @@
 /* Regular Expressions*/
 KEYWORD                 "char"|"else"|"for"|"if"|"int"|"return"|"void"
 NONDIGIT                [_a-zA-Z]
+NONDIGIT_DIGIT          [_a-zA-Z0-9]
 DIGIT                   [0-9]
 NON_ZERO_DIGIT          [1-9]
 SIGN                    [+|-]
-IDENTIFIER              {NONDIGIT}{NONDIGIT|DIGIT}*
+IDENTIFIER              {NONDIGIT}{NONDIGIT_DIGIT}*
 INTEGER_CONSTANT        {SIGN}?{NON_ZERO_DIGIT}{DIGIT}*|0
 ESCAPE_SEQUENCE         \\[\'\"?\\abfnrtv]
 C_CHAR                  [^\'\\\n]|{ESCAPE_SEQUENCE}
 C_CHAR_SEQUENCE         {C_CHAR}+
 CHARACTER_CONSTANT      \'({C_CHAR_SEQUENCE})\'
 Constants               {INTEGER_CONSTANT}|{CHARACTER_CONSTANT}
-S_CHAR                  {^\"\\\n}|{ESCAPE_SEQUENCE}
-S_CHAR_SEQUENCE         {S_CHAR}+\0
+S_CHAR                  [^\"\\\n]|{ESCAPE_SEQUENCE}
+S_CHAR_SEQUENCE         {S_CHAR}+\\0
 STRING_LITERAL          \"({S_CHAR_SEQUENCE})\"
 PUNCTUATOR              "["|"]"|"("|")"|"{"|"}"|"->"|"&"|"*"|"+"|"-"|"/"|"%"|"!"|"?"|"<"|">"|"<="|">="|"=="|"!="|"&&"|"||"|"="|":"|";"|","
 WS                      [ \t\n]
