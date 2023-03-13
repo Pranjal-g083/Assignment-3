@@ -34,11 +34,19 @@ int main()
                 break;
 
             case CHAR_CONSTANT: 
-                printf("<CHAR_CONSTANT, %d, %s>\n", token, yytext);
+                printf("<CHAR CONSTANT, %d, ", token);
+                for(int i=1;yytext[i+1]!='\0';i++){
+                	printf("%c", yytext[i]);
+                }
+                printf(">\n");
                 break;
 
             case STRING_LITERAL: 
-                printf("<STRING_LITERAL, %d, %s>\n", token, yytext);
+                printf("<STRING_LITERAL, %d, ", token);
+                for(int i=1;yytext[i+1]!='\0';i++){
+                	printf("%c", yytext[i]);
+                }
+                printf(">\n");
                 break;
 
             case PUNCTUATOR: 
